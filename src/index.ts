@@ -1,14 +1,27 @@
-interface Human {
-    name: string;
-    age: number;
-    isProgrammer: boolean;
+class Human {
+    public name: string;
+    public age: number;
+    public isProgrammer: boolean;
+    private location: string;
+
+    constructor(name: string, age: number, isProgrammer: boolean, location?: string) {
+        this.name = name;
+        this.age = age;
+        this.isProgrammer = isProgrammer;
+        this.location = location;
+    }
+
+    home() {
+        console.log(this.location);
+    }
 }
 
-const person = {
-    name: 'Smith',
-    age: 22,
-    isProgrammer: true
-};
+const jimmy = new Human('Jimmy', 16, false);
+const smith = new Human('Smith', 22, true, 'NY');
+
+jimmy.home(); // undefined
+smith.home();
+// smith.location; // compilation failed
 
 const hello = (person: Human): string => {
     return `Hello, ${person.name}! You are ${person.age} years old and ${
@@ -16,6 +29,6 @@ const hello = (person: Human): string => {
     }`;
 };
 
-console.log(hello(person));
+console.log(hello(smith));
 
 export {};
