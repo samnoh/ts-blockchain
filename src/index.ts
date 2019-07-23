@@ -1,34 +1,29 @@
-class Human {
-    public name: string;
-    public age: number;
-    public isProgrammer: boolean;
-    private location: string;
+class Block {
+    public index: number;
+    public hash: string;
+    public previousHash: string;
+    public data: string;
+    public timestamp: number;
 
-    constructor(name: string, age: number, isProgrammer: boolean, location?: string) {
-        this.name = name;
-        this.age = age;
-        this.isProgrammer = isProgrammer;
-        this.location = location;
-    }
-
-    home() {
-        console.log(this.location);
+    constructor(
+        index: number,
+        hash: string,
+        previousHash: string,
+        data: string,
+        timestamp: number
+    ) {
+        this.index = index;
+        this.hash = hash;
+        this.previousHash = previousHash;
+        this.data = data;
+        this.timestamp = timestamp;
     }
 }
 
-const jimmy = new Human('Jimmy', 16, false);
-const smith = new Human('Smith', 22, true, 'NY');
+const genesisBlock: Block = new Block(0, '123456789', '', 'Hello World', Date.now());
 
-jimmy.home(); // undefined
-smith.home();
-// smith.location; // compilation failed
+let blockchain: [Block] = [genesisBlock];
 
-const hello = (person: Human): string => {
-    return `Hello, ${person.name}! You are ${person.age} years old and ${
-        person.isProgrammer ? 'a programmer!' : 'not a programmer!'
-    }`;
-};
-
-console.log(hello(smith));
+console.log(blockchain);
 
 export {};
