@@ -1,13 +1,21 @@
-const name = 'Smith';
-const age = 22;
-const isProgrammer = false;
+interface Human {
+    name: string;
+    age: number;
+    isProgrammer: boolean;
+}
 
-const hello = (name: string, age: number, isProgrammer: boolean): string => {
-    return `Hello, ${name}! You are ${age} years old and ${
-        isProgrammer ? 'a programmer!' : 'not a programmer!'
+const person = {
+    name: 'Smith',
+    age: 22,
+    isProgrammer: true
+};
+
+const hello = (person: Human): string => {
+    return `Hello, ${person.name}! You are ${person.age} years old and ${
+        person.isProgrammer ? 'a programmer!' : 'not a programmer!'
     }`;
 };
 
-console.log(hello(name, age, isProgrammer));
+console.log(hello(person));
 
 export {};
