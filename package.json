@@ -5,7 +5,9 @@
     "main": "src/index.js",
     "private": true,
     "scripts": {
-        "start": "rm -rf build && tsc && node build/index.js"
+        "start": "tsc-watch --onSuccess \"node build/index.js\" --onFailure \"echo Compilation Failed\" ",
+        "build": "tsc",
+        "clean": "rm -rf build"
     },
     "repository": {
         "type": "git",
@@ -15,10 +17,14 @@
         "Typescript",
         "Blockchain"
     ],
-    "author": "",
+    "author": "samnoh",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/samnoh/typescript_blockchain/issues"
     },
-    "homepage": "https://github.com/samnoh/typescript_blockchain#readme"
+    "homepage": "https://github.com/samnoh/typescript_blockchain#readme",
+    "devDependencies": {
+        "tsc-watch": "^2.2.1",
+        "typescript": "^3.5.3"
+    }
 }
