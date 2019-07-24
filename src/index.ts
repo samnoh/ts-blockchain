@@ -1,31 +1,50 @@
-import test from './test';
+import Block from './Block';
 
-class Block {
-    public index: number;
-    public hash: string;
-    public previousHash: string;
-    public data: string;
-    public timestamp: number;
+const genesisBlock: Block = new Block(
+    0,
+    Block.calculateBlockHash(0, null, Date.now(), 'Hello World!'),
+    null,
+    'Hello World!',
+    Date.now()
+);
 
-    constructor(
-        index: number,
-        hash: string,
-        previousHash: string,
-        data: string,
-        timestamp: number
-    ) {
-        this.index = index;
-        this.hash = hash;
-        this.previousHash = previousHash;
-        this.data = data;
-        this.timestamp = timestamp;
-    }
-}
+const blockchain: Block[] = [genesisBlock];
 
-const genesisBlock: Block = new Block(0, '123456789', '', 'Hello World', Date.now());
+const getBlockchain = (): Block[] => blockchain;
 
-let blockchain: [Block] = [genesisBlock];
+const getLatestBlock = (): Block => blockchain[blockchain.length - 1];
 
-console.log(blockchain);
-test();
-export {};
+const createNewBlock = (data: string): Block => {
+    const prevBlock: Block = getLatestBlock();
+    const newIndex: number = prevBlock.index + 1;
+    const newTimestamp: number = Date.now();
+    const newHash: string = Block.calculateBlockHash(newIndex, prevBlock.hash, newTimestamp, data);
+
+    const newBlock: Block = new Block(newIndex, newHash, prevBlock.hash, data, newTimestamp);
+
+    addBlock(newBlock);
+
+    return newBlock;
+};
+
+const getBlockHash = (block: Block): string =>
+    Block.calculateBlockHash(block.index, block.prevHash, block.timestamp, block.data);
+
+const isBlockValid = (candidateBlock: Block, prevBlock: Block): boolean => {
+    if (!Block.validateBlock(candidateBlock)) return false;
+    else if (prevBlock.index + 1 !== candidateBlock.index) return false;
+    else if (prevBlock.hash !== candidateBlock.prevHash) return false;
+    else if (getBlockHash(candidateBlock) !== candidateBlock.hash) return false;
+
+    return true;
+};
+
+const addBlock = (candidateBlock: Block): void => {
+    if (isBlockValid(candidateBlock, getLatestBlock())) blockchain.push(candidateBlock);
+};
+
+createNewBlock('JavaScript');
+createNewBlock('TypeScript');
+createNewBlock('CoffeeScript');
+
+console.log(getBlockchain());
