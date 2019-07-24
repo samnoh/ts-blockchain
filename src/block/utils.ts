@@ -17,7 +17,7 @@ const addBlock = (candidateBlock: Block): void => {
     if (isBlockValid(candidateBlock, getLatestBlock())) getBlockchain().push(candidateBlock);
 };
 
-const createNewBlock = (data: string): Block => {
+export const createNewBlock = (data: string): Block => {
     const prevBlock: Block = getLatestBlock();
     const newIndex: number = prevBlock.index + 1;
     const newTimestamp: number = Date.now();
@@ -30,4 +30,4 @@ const createNewBlock = (data: string): Block => {
     return newBlock;
 };
 
-export { createNewBlock, getBlockchain };
+export { getBlockchain };
