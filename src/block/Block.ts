@@ -1,6 +1,6 @@
 import * as CryptoJS from 'crypto-js';
 
-class Block {
+export default class Block {
     public index: number;
     public hash: string;
     public prevHash: string;
@@ -29,5 +29,3 @@ class Block {
         typeof block.data === 'string' &&
         typeof block.timestamp === 'number';
 }
-
-export default Block;
