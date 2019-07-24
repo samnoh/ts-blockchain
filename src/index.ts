@@ -1,3 +1,5 @@
+import test from './test';
+
 class Block {
     public index: number;
     public hash: string;
@@ -25,5 +27,5 @@ const genesisBlock: Block = new Block(0, '123456789', '', 'Hello World', Date.no
 let blockchain: [Block] = [genesisBlock];
 
 console.log(blockchain);
-
+test();
 export {};
