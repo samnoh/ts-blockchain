@@ -1,4 +1,4 @@
-# TypeScript BlockChian
+# TypeScript Blockchian
 
 ## Install
 
